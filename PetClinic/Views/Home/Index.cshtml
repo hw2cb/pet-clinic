@@ -1,0 +1,122 @@
+﻿@model PetClinic.Models.HomeVM.HomeViewModel
+@{
+    ViewBag.Title = "Главная страница";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-2">
+            <h2>Главная страница</h2>
+        </div>
+    </div>
+
+    <div class="row panel panel-default">
+
+        <!--STATS VET-->
+        <div class="col-md-6 mb-2 panel-heading">
+            <h2>Профиль</h2>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @Html.DisplayNameFor(model => model.Surname)
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(model => model.Surname)
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @Html.DisplayNameFor(model => model.Name)
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @Html.DisplayNameFor(model => model.Patronymic)
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(model => model.Patronymic)
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @Html.DisplayNameFor(model => model.Position)
+                </div>
+                <div class="panel-body">
+                    @Html.DisplayFor(model => model.Position)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-2 panel-heading">
+            <h2>Статистика</h2>
+            @Html.DisplayNameFor(model => model.CountVisitToDay)
+            @if (Model.Visits.Count() == 0)
+            {
+                <h3 class="well well-lg">На сегодня запланированных приемов нет!</h3>
+            }
+            else
+            {
+                for (int i = 0; i < Model.Visits.Count(); i++)
+                {
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="well well-lg">Прием #@i</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge glyphicon glyphicon-time"></span>
+                                    @Html.DisplayNameFor(model => model.Visits.ElementAt(i).DateVisit)
+                                </li>
+                                <li class="list-group-item">
+                                    @Html.DisplayFor(model => model.Visits.ElementAt(i).DateVisit)
+                                </li>
+
+
+                                <li class="list-group-item">
+                                    <span class="badge glyphicon glyphicon-piggy-bank"></span>
+                                    @Html.DisplayNameFor(model => model.Visits.ElementAt(i).TypeAnimal)
+                                </li>
+                                <li class="list-group-item">
+                                    @Html.DisplayFor(model => model.Visits.ElementAt(i).TypeAnimal)
+                                </li>
+
+                                <li class="list-group-item">
+                                    <span class="badge glyphicon glyphicon-grain"></span>
+                                    @Html.DisplayNameFor(model => model.Visits.ElementAt(i).Breed)
+                                </li>
+                                <li class="list-group-item">
+                                    @Html.DisplayFor(model => model.Visits.ElementAt(i).Breed)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6 mb-2 panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Панель управления</h2>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a class="btn btn-default">Регистрация нового клиента</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-default">Создание приема</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-default">Просмотр всех животных</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
