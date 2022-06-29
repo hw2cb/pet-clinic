@@ -269,6 +269,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Animal\Index.cshtml" />
     <Content Include="Views\Owner\CreateOwner.cshtml" />
+    <Content Include="Views\Animal\CreateAnimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

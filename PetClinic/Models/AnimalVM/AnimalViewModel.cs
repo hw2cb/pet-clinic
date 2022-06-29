@@ -33,10 +33,9 @@ namespace PetClinic.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Дата рождения")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirthday { get; set; }
-        [Required]
-        [Display(Name = "Дата регистрации")]
-        public DateTime RegisterDate { get; set; }
         [Required]
         [Display(Name = "Вес")]
         public double Weight { get; set; }

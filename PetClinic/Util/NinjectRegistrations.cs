@@ -15,6 +15,7 @@ namespace PetClinic.Util
             Bind<IAnimalsService>().To<AnimalsService>().InSingletonScope();
             Bind<IOwnersService>().To<OwnersService>().InSingletonScope();
             Bind<IVisitsService>().To<VisitsService>().InSingletonScope();
+            Bind<ITypesAnimalService>().To<TypesAnimalService>().InSingletonScope();
         }
     }
 }

@@ -15,9 +15,11 @@ namespace PetClinic.Controllers
     public class AnimalController : Controller
     {
         private IAnimalsService _animalsService;
-        public AnimalController(IAnimalsService animalsService)
+        private ITypesAnimalService _typesAnimalService;
+        public AnimalController(IAnimalsService animalsService, ITypesAnimalService typesAnimalService)
         {
             _animalsService = animalsService;
+            _typesAnimalService = typesAnimalService;
         }
         // GET: Animal
         public async Task<ActionResult> Index()
@@ -47,12 +49,40 @@ namespace PetClinic.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateAnimal(int id)
+        public async Task<ActionResult> CreateAnimal(int idOwner)
         {
+            var typesAnimalFromDB = await _typesAnimalService.GetTypesAnimal();
             RegisterAnimalViewModel vm = new RegisterAnimalViewModel();
-            vm.OwnerId = id;
-            //vm.TypeAnimalList = 
-            return View();
+            vm.OwnerId = idOwner;
+            vm.TypeAnimalList = typesAnimalFromDB.Select(i => new SelectListItem
+            {
+                Text = i.Type,
+                Value = i.Id.ToString()
+            });
+
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateAnimal(RegisterAnimalViewModel vm)
+        {
+            if(ModelState.IsValid)
+            {
+                AnimalDTO animalDTO = new AnimalDTO
+                {
+                    Name = vm.Name,
+                    DateOfBirthday = vm.DateOfBirthday,
+                    RegisterDate = DateTime.Now,
+                    Weight = vm.Weight,
+                    Height = vm.Height,
+                    TypeAnimalId = vm.TypeAnimalId,
+                    Breed = vm.Breed,
+                    OwnerId = vm.OwnerId
+                };
+                await _animalsService.RegisterAnimal(animalDTO);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(vm);
+
         }
     }
 }

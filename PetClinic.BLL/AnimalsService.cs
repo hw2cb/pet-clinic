@@ -28,6 +28,7 @@ namespace PetClinic.BLL
 
             List<AnimalDTO> animalDTOs = new List<AnimalDTO>();
 
+
             for (int i=0; i< animalsFromDb.Count(); i++)
             {
                 animalDTOs.Add(AnimalConverter.ConvertToDTO(animalsFromDb.ElementAt(i)));

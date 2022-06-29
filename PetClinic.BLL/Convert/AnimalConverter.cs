@@ -39,7 +39,7 @@ namespace PetClinic.BLL.Convert
                 OwnerId = animalDTO.OwnerId,
                 Weight = animalDTO.Weight,
                 Height = animalDTO.Height,
-                TypeAnimalId = animalDTO.TypeAnimal.Id,
+                TypeAnimalId = animalDTO.TypeAnimalId,
                 Breed = animalDTO.Breed
             };
             return animal;

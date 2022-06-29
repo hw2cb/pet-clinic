@@ -105,13 +105,13 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a class="btn btn-default">Регистрация нового клиента</a>
+                            @Html.ActionLink("Регистрация нового клиента","CreateOwner", "Owner", null, new {@class="btn btn-default"})
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-default">Создание приема</a>
+                            @Html.ActionLink("Создание приема", "CreateVisits", "Visits", null, new { @class = "btn btn-default" })
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-default">Просмотр всех животных</a>
+                            @Html.ActionLink("Регистрация нового клиента", "Index", "Animal", null,  new { @class = "btn btn-default" })
                         </li>
                     </ul>
                 </div>

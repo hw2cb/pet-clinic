@@ -45,9 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimalsService.cs" />
+    <Compile Include="Convert\AnimalConverter.cs" />
+    <Compile Include="Convert\OwnerConverter.cs" />
+    <Compile Include="Convert\TypeAnimalConverter.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
     <Compile Include="OwnersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesAnimalService.cs" />
     <Compile Include="VisitsService.cs" />
   </ItemGroup>
   <ItemGroup>
