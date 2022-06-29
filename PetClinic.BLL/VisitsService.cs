@@ -1,4 +1,5 @@
-﻿using PetClinic.BLL.Interfaces;
+﻿using PetClinic.BLL.Convert;
+using PetClinic.BLL.Interfaces;
 using PetClinic.DAL.Interfaces;
 using PetClinic.DTO;
 using System;
@@ -31,55 +32,8 @@ namespace PetClinic.BLL
             //TODO: AutoMapper
             for(int i=0; i < visitsFromDB.Count(); i++)
             {
-                //заполнение модели DTO для транспортировки в PL, в будущем разобраться с AutoMapper
-                //TODO: инкапсулировать в отдельный сервис для маппинга
-                var visitDTO = new VisitDTO
-                {
-                    Id = visitsFromDB.ElementAt(i).Id,
-                    VetId = visitsFromDB.ElementAt(i).VetId,
-                    DateVisit = visitsFromDB.ElementAt(i).DateVisit,
-                    Diagnosis = visitsFromDB.ElementAt(i).Diagnosis,
-                    Comments = visitsFromDB.ElementAt(i).Comments,
-                    Cost = visitsFromDB.ElementAt(i).Cost,
-                    //начало заполнения Animal:
-                    Animal = new AnimalDTO
-                    {
-                        Id = visitsFromDB.ElementAt(i).Animal.Id,
-                        Name = visitsFromDB.ElementAt(i).Animal.Name,
-                        DateOfBirthday = visitsFromDB.ElementAt(i).Animal.DateOfBirthday,
-                        RegisterDate = visitsFromDB.ElementAt(i).Animal.RegisterDate,
-                        OwnerId = visitsFromDB.ElementAt(i).Animal.OwnerId,
-                        //начало заполнения Owner в Animal
-                        Owner = new OwnerDTO 
-                        { 
-                            Id = visitsFromDB.ElementAt(i).Animal.Owner.Id, 
-                            Name = visitsFromDB.ElementAt(i).Animal.Owner.Name, 
-                            Surname = visitsFromDB.ElementAt(i).Animal.Owner.Surname,
-                            Phone = visitsFromDB.ElementAt(i).Animal.Owner.Phone
-                        },
-
-                        Weight = visitsFromDB.ElementAt(i).Animal.Weight,
-                        Height = visitsFromDB.ElementAt(i).Animal.Height,
-                        TypeAnimalId = visitsFromDB.ElementAt(i).Animal.TypeAnimalId,
-                        //начало заполнения TypeAnimal в Animal
-                        TypeAnimal = new TypeAnimalDTO
-                        {
-                            Id = visitsFromDB.ElementAt(i).Animal.TypeAnimal.Id,
-                            Type = visitsFromDB.ElementAt(i).Animal.TypeAnimal.Type
-                        },
-                        Breed = visitsFromDB.ElementAt(i).Animal.Breed
-                    },
-                    //конец заполнения AnimalDTO в классе VisitDTO
-                    //начало заполнения RecipeDTO в класс VisitDTO
-                    Recipe = new RecipeDTO
-                    {
-                        Id = visitsFromDB.ElementAt(i).Recipe.Id,
-                        DateOfIssue = visitsFromDB.ElementAt(i).Recipe.DateOfIssue,
-                        Duration = visitsFromDB.ElementAt(i).Recipe.Duration,
-                        Treatment = visitsFromDB.ElementAt(i).Recipe.Treatment
-                    }
-
-                };
+                var visitDTO = VisitConverter.ConvertToDTO(visitsFromDB.ElementAt(i));
+                
                 visits.Add(visitDTO);
 
             }
