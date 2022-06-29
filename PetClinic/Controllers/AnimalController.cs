@@ -51,7 +51,7 @@ namespace PetClinic.Controllers
         {
             RegisterAnimalViewModel vm = new RegisterAnimalViewModel();
             vm.OwnerId = id;
-            vm.TypeAnimalList = 
+            //vm.TypeAnimalList = 
             return View();
         }
     }

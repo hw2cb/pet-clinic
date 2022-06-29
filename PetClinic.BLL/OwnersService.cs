@@ -1,4 +1,5 @@
-﻿using PetClinic.BLL.Interfaces;
+﻿using PetClinic.BLL.Convert;
+using PetClinic.BLL.Interfaces;
 using PetClinic.DAL.Interfaces;
 using PetClinic.DTO;
 using PetClinic.Entities;
@@ -27,15 +28,7 @@ namespace PetClinic.BLL
             if (ownerFromDb == null)
                 throw new Exception("Owner not found");
 
-
-            OwnerDTO ownerDTO = new OwnerDTO
-            {
-                Id = ownerFromDb.Id,
-                Name = ownerFromDb.Name,
-                Surname = ownerFromDb.Surname,
-                Phone = ownerFromDb.Phone
-            };
-            return ownerDTO;
+            return OwnerConverter.ConvertToDTO(ownerFromDb);
         }
 
         public async Task<int> UpsertOwner(OwnerDTO ownerDTO)
@@ -43,13 +36,8 @@ namespace PetClinic.BLL
             if(ownerDTO == null)
                 throw new ArgumentNullException(nameof(ownerDTO));
 
-            Owner owner = new Owner
-            {
-                Id = ownerDTO.Id,
-                Name = ownerDTO.Name,
-                Surname = ownerDTO.Surname,
-                Phone = ownerDTO.Phone
-            };
+            Owner owner = OwnerConverter.ConvertFromDTO(ownerDTO);
+
             int idOwner = await _ownersDAO.AddOwner(owner);
             return idOwner;
         }
